@@ -119,13 +119,7 @@ function create() {
     },
 
     move(time) {
-      /**
-            * Based on the heading property (which is the direction the pgroup pressed)
-            * we update the headPosition value accordingly.
-            *
-            * The Math.wrap call allow the snake to wrap around the screen, so when
-            * it goes off any of the sides it re-appears on the other.
-            */
+   
       switch (this.heading) {
         case LEFT:
           this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x - 1, 0, 40);
@@ -149,11 +143,9 @@ function create() {
 
       this.direction = this.heading;
 
-      //  Update the body segments and place the last coordinate into this.tail
       Phaser.Actions.ShiftPosition(this.body.getChildren(),
         this.headPosition.x * 16, this.headPosition.y * 16, 1, this.tail);
 
-      //  Update the timer ready for the next movement
       this.moveTime = time + this.speed;
 
       return true;
@@ -183,7 +175,6 @@ function create() {
 
   snake = new Snake(this, 8, 8);
 
-  //  Create our keyboard controls
   cursors = this.input.keyboard.createCursorKeys();
 }
 
@@ -192,13 +183,8 @@ function update(time, delta) {
     return;
   }
 
-  /**
-    * Check which key is pressed, and then change the direction the snake
-    * is heading based on that. The checks ensure you don't double-back
-    * on yourself, for example if you're moving to the right and you press
-    * the LEFT cursor, it ignores it, because the only valid directions you
-    * can move in at that time is up and down.
-    */
+
+  
   if (cursors.left.isDown) {
     snake.faceLeft();
   } else if (cursors.right.isDown) {
@@ -210,8 +196,7 @@ function update(time, delta) {
   }
 
   if (snake.update(time)) {
-    //  If the snake updated, we need to check for collision against food
-
+  
     snake.collideWithFood(food);
   }
 }
