@@ -119,7 +119,6 @@ function create() {
     },
 
     move(time) {
-   
       switch (this.heading) {
         case LEFT:
           this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x - 1, 0, 40);
@@ -184,7 +183,6 @@ function update(time, delta) {
   }
 
 
-  
   if (cursors.left.isDown) {
     snake.faceLeft();
   } else if (cursors.right.isDown) {
@@ -196,7 +194,6 @@ function update(time, delta) {
   }
 
   if (snake.update(time)) {
-  
     snake.collideWithFood(food);
   }
 }
