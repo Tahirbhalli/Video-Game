@@ -16,7 +16,7 @@ This is Snake game.
 
 ## Live Demo
 
-[Live Demo Link](https://rawcdn.githack.com/Tahirbhalli/Video-Game/42702998def30cbee0ce3f179656a92702560cac/dist/index.html)
+[Live Demo Link](https://rawcdn.githack.com/Tahirbhalli/Video-Game/fa443f0366b6ed75e01389cc93d2e17c54286307/dist/index.html)
 
 
 ## Authors
