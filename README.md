@@ -18,6 +18,8 @@ This is Snake game.
 
 [Live Demo Link](https://rawcdn.githack.com/Tahirbhalli/Video-Game/fa443f0366b6ed75e01389cc93d2e17c54286307/dist/index.html)
 
+## Presentation
+[Presentation Link](https://www.loom.com/share/b4be3c8e42b44255bfffb1057a65cb00)
 
 ## Authors
 
