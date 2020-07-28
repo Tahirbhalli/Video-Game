@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-undef */
 const food1 = require('../assets/food.png');
@@ -6,11 +7,26 @@ const body = require('../assets/body.png');
 let snake;
 let food;
 let cursors;
+// eslint-disable-next-line prefer-const
+let speed = () => {
+  const b = document.querySelector('input');
+  switch (b.value) {
+    case '1':
+      return 200;
+    case '2':
+      return 100;
+    case 3:
+      return 50;
+    default:
+      break;
+  }
+};
 
 const UP = 0;
 const DOWN = 1;
 const LEFT = 2;
 const RIGHT = 3;
+
 class Scene1 extends Phaser.Scene {
   constructor() {
     super('start game');
@@ -65,8 +81,7 @@ class Scene1 extends Phaser.Scene {
 
             this.alive = true;
 
-            this.speed = 100;
-
+            this.speed = speed();
             this.moveTime = 0;
 
             this.tail = new Phaser.Geom.Point(x, y);

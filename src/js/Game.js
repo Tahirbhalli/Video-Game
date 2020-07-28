@@ -12,5 +12,7 @@ const config = {
   scene: [Scene1],
 };
 
-
-const game = new Phaser.Game(config);
+const Game = () => {
+  const game = new Phaser.Game(config);
+};
+export default Game;
