@@ -30,6 +30,7 @@ const RIGHT = 3;
 class Scene1 extends Phaser.Scene {
   constructor() {
     super('start game');
+    this.score = 0;
   }
 
   preload() {
@@ -58,11 +59,6 @@ class Scene1 extends Phaser.Scene {
 
       eat() {
         this.total += 1;
-
-        const x = Phaser.Math.Between(0, 39);
-        const y = Phaser.Math.Between(0, 29);
-
-        this.setPosition(x * 16, y * 16);
       },
 
     });
@@ -89,8 +85,6 @@ class Scene1 extends Phaser.Scene {
             this.heading = RIGHT;
             this.direction = RIGHT;
           },
-
-      // eslint-disable-next-line consistent-return
       update(time) {
         if (time >= this.moveTime) {
           return this.move(time);
@@ -139,15 +133,23 @@ class Scene1 extends Phaser.Scene {
             this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y + 1, 0, 30);
             break;
           default:
-            console.log('excpetion');
             break;
         }
 
         this.direction = this.heading;
 
-        Phaser.Actions.ShiftPosition(this.body.getChildren(),
-          this.headPosition.x * 16, this.headPosition.y * 16, 1, this.tail);
+        Phaser.Actions.ShiftPosition(this.body.getChildren(), this.headPosition.x * 16,
+          this.headPosition.y * 16, 1, this.tail);
+        const hitBody = Phaser.Actions.GetFirst(this.body.getChildren(),
+          { x: this.head.x, y: this.head.y }, 1);
 
+        if (hitBody) {
+          console.log('dead');
+
+          this.alive = false;
+
+          return false;
+        }
         this.moveTime = time + this.speed;
 
         return true;
@@ -165,10 +167,25 @@ class Scene1 extends Phaser.Scene {
 
           food.eat();
 
+          if (this.speed > 20 && food.total % 5 === 0) {
+            this.speed -= 5;
+          }
+
           return true;
         }
 
         return false;
+      },
+
+      updateGrid(grid) {
+        this.body.children.each((segment) => {
+          const bx = segment.x / 16;
+          const by = segment.y / 16;
+
+          grid[by][bx] = false;
+        });
+
+        return grid;
       },
 
     });
@@ -186,7 +203,6 @@ class Scene1 extends Phaser.Scene {
       return;
     }
 
-
     if (cursors.left.isDown) {
       snake.faceLeft();
     } else if (cursors.right.isDown) {
@@ -198,8 +214,47 @@ class Scene1 extends Phaser.Scene {
     }
 
     if (snake.update(time)) {
-      snake.collideWithFood(food);
+      if (snake.collideWithFood(food)) {
+        this.repositionFood();
+      }
     }
+  }
+
+  repositionFood() {
+    this.score += 1;
+    console.log(this.score);
+    document.getElementById('score').innerHTML = this.score;
+    const testGrid = [];
+
+    for (let y = 0; y < 30; y += 1) {
+      testGrid[y] = [];
+
+      for (let x = 0; x < 40; x += 1) {
+        testGrid[y][x] = true;
+      }
+    }
+
+    snake.updateGrid(testGrid);
+
+
+    const validLocations = [];
+
+    for (let y = 0; y < 30; y += 1) {
+      for (let x = 0; x < 40; x += 1) {
+        if (testGrid[y][x] === true) {
+          validLocations.push({ x, y });
+        }
+      }
+    }
+
+    if (validLocations.length > 0) {
+      const pos = Phaser.Math.RND.pick(validLocations);
+
+      food.setPosition(pos.x * 16, pos.y * 16);
+
+      return true;
+    }
+    return false;
   }
 }
 export default Scene1;
