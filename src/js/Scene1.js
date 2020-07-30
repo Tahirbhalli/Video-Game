@@ -147,8 +147,6 @@ class Scene1 extends Phaser.Scene {
           { x: this.head.x, y: this.head.y }, 1);
 
         if (hitBody) {
-          console.log('dead');
-
           this.alive = false;
 
           return false;
@@ -225,7 +223,6 @@ class Scene1 extends Phaser.Scene {
 
   repositionFood() {
     this.score += 1;
-    console.log(typeof (this.score));
     DB.updatescore(this.score);
     DB.set();
     document.getElementById('score').innerHTML = this.score;

@@ -5,6 +5,8 @@ const DB = (() => {
   };
   const datatable = (data) => {
     const table = document.getElementById('results');
+    document.getElementById('1').innerHTML = 'You';
+    document.getElementById('2').innerHTML = localStorage.getItem('score');
     data.result.forEach(element => {
       const tr = document.createElement('tr');
       const td1 = document.createElement('td');
@@ -15,8 +17,6 @@ const DB = (() => {
       tr.appendChild(td2);
       table.appendChild(tr);
     });
-    document.getElementById('1').innerHTML = 'You';
-    document.getElementById('2').innerHTML = localStorage.getItem('score');
   };
 
   const set = () => {
@@ -27,6 +27,7 @@ const DB = (() => {
   return {
     updatescore,
     set,
+    datatable,
   };
 })();
-export default DB;
+module.exports = DB;
