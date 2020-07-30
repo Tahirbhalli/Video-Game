@@ -1,7 +1,7 @@
 # Video-Game
 ![image](./screenshot.png)
 
-This is Snake game.
+This is Snake game. The Game consists a leaderboard where the other players score shown as well,You can set the speed of the snale and then start the game.
 ## Built With
 
 - Html
