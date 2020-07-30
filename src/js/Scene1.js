@@ -1,6 +1,9 @@
 /* eslint-disable consistent-return */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-undef */
+
+import DB from './db';
+
 const food1 = require('../assets/food.png');
 const body = require('../assets/body.png');
 
@@ -222,7 +225,9 @@ class Scene1 extends Phaser.Scene {
 
   repositionFood() {
     this.score += 1;
-    console.log(this.score);
+    console.log(typeof (this.score));
+    DB.updatescore(this.score);
+    DB.set();
     document.getElementById('score').innerHTML = this.score;
     const testGrid = [];
 
