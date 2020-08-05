@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "leaderboard": "0.0.9",
+    "milsymbol": "^2.0.0",
     "packagejson": "^1.0.1"
   }
 }
