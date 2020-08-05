@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable no-use-before-define */
@@ -12,7 +13,5 @@ const config = {
   scene: [Scene1],
 };
 
-const Game = () => {
-  const game = new Phaser.Game(config);
-};
+const Game = () => new Phaser.Game(config);
 export default Game;

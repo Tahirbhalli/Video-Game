@@ -1,7 +1,8 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable consistent-return */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-undef */
-
+import Restart from './restart';
 import DB from './db';
 
 const food1 = require('../assets/food.png');
@@ -34,6 +35,7 @@ class Scene1 extends Phaser.Scene {
   constructor() {
     super('start game');
     this.score = 0;
+    this.isover = 0;
   }
 
   preload() {
@@ -201,6 +203,12 @@ class Scene1 extends Phaser.Scene {
   // eslint-disable-next-line no-unused-vars
   update(time, delta) {
     if (!snake.alive) {
+      if (this.isover === 0) {
+        this.isover = -1;
+        const a = document.querySelector('canvas');
+        document.body.removeChild(a);
+        document.body.appendChild(Restart.start());
+      }
       return;
     }
 
