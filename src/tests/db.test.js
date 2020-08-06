@@ -9,3 +9,7 @@ test('local storage', () => {
 test('table ', () => {
   expect(typeof (DB.datatable([1, 2, 3]))).toBe(typeof (document.createElement('table')));
 });
+test('update score', () => {
+  DB.updatescore(1);
+  expect('1').toBe(localStorage.getItem('score'));
+});

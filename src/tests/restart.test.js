@@ -1,5 +1,5 @@
 const Restart = require('../js/restart');
 
-test('should ', () => {
+test('Restart method ', () => {
   expect(typeof (Restart())).toBe(typeof (document.createElement('div')));
 });
