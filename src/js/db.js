@@ -5,18 +5,23 @@ const DB = (() => {
   };
   const datatable = (data) => {
     const table = document.getElementById('results');
-    document.getElementById('1').innerHTML = 'You';
-    document.getElementById('2').innerHTML = localStorage.getItem('score');
-    data.result.forEach(element => {
-      const tr = document.createElement('tr');
-      const td1 = document.createElement('td');
-      const td2 = document.createElement('td');
-      td1.innerHTML = element.user;
-      td2.innerHTML = element.score;
-      tr.appendChild(td1);
-      tr.appendChild(td2);
-      table.appendChild(tr);
-    });
+    try {
+      document.getElementById('1').innerHTML = 'You';
+      document.getElementById('2').innerHTML = localStorage.getItem('score');
+      data.result.forEach(element => {
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td');
+        const td2 = document.createElement('td');
+        td1.innerHTML = element.user;
+        td2.innerHTML = element.score;
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        table.appendChild(tr);
+      });
+    } catch (error) {
+      console.log('no');
+    }
+    return table;
   };
 
   const set = () => {

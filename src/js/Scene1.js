@@ -207,7 +207,7 @@ class Scene1 extends Phaser.Scene {
         this.isover = -1;
         const a = document.querySelector('canvas');
         document.body.removeChild(a);
-        document.body.appendChild(Restart.start());
+        document.body.appendChild(Restart());
       }
       return;
     }
