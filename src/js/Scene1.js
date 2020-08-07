@@ -5,6 +5,8 @@
 import Restart from './restart';
 import DB from './db';
 
+const speed = require('./speed');
+
 const food1 = require('../assets/food.png');
 const body = require('../assets/body.png');
 
@@ -12,19 +14,6 @@ let snake;
 let food;
 let cursors;
 // eslint-disable-next-line prefer-const
-let speed = () => {
-  const b = document.querySelector('input');
-  switch (b.value) {
-    case '1':
-      return 200;
-    case '2':
-      return 100;
-    case 3:
-      return 50;
-    default:
-      break;
-  }
-};
 
 const UP = 0;
 const DOWN = 1;
@@ -50,24 +39,23 @@ class Scene1 extends Phaser.Scene {
 
       initialize:
 
-          function Food(scene, x, y) {
-            Phaser.GameObjects.Image.call(this, scene);
+            function Food(scene, x, y) {
+              Phaser.GameObjects.Image.call(this, scene);
 
-            this.setTexture('food');
-            this.setPosition(x * 16, y * 16);
-            this.setOrigin(0);
+              this.setTexture('food');
+              this.setPosition(x * 16, y * 16);
+              this.setOrigin(0);
 
-            this.total = 0;
+              this.total = 0;
 
-            scene.children.add(this);
-          },
+              scene.children.add(this);
+            },
 
       eat() {
         this.total += 1;
       },
 
     });
-
     const Snake = new Phaser.Class({
 
       initialize:
@@ -205,6 +193,7 @@ class Scene1 extends Phaser.Scene {
     if (!snake.alive) {
       if (this.isover === 0) {
         this.isover = -1;
+        DB.setscore('abc', this.score);
         const a = document.querySelector('canvas');
         document.body.removeChild(a);
         document.body.appendChild(Restart());
@@ -231,9 +220,8 @@ class Scene1 extends Phaser.Scene {
 
   repositionFood() {
     this.score += 1;
-    DB.updatescore(this.score);
-    DB.set();
     document.getElementById('score').innerHTML = this.score;
+    document.getElementById('2').innerHTML = this.score;
     const testGrid = [];
 
     for (let y = 0; y < 30; y += 1) {

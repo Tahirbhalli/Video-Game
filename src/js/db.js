@@ -1,7 +1,7 @@
 /* eslint-disable prefer-destructuring */
 const DB = (() => {
-  const updatescore = (score) => {
-    localStorage.setItem('score', score);
+  const setusername = (name) => {
+    localStorage.setItem('user', name);
   };
   const datatable = (data) => {
     const table = document.getElementById('results');
@@ -24,14 +24,22 @@ const DB = (() => {
     return table;
   };
 
-  const set = () => {
-    fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Zl4d7IVkemOTTVg2fUdz/scores/')
+  const get = () => {
+    fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/5R5Sah9tg5zSJ3GLqlDi/scores')
       .then(respons => respons.json()).then(data => datatable(data))
       .catch(err => console.log(err));
   };
+  const setscore = (username, totalscore) => {
+    fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/5R5Sah9tg5zSJ3GLqlDi/scores', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user: username, score: totalscore }),
+    }).then(res => res.json()).then(res => console.log(res)).catch(err => console.log(err));
+  };
   return {
-    updatescore,
-    set,
+    setusername,
+    get,
+    setscore,
     datatable,
   };
 })();
