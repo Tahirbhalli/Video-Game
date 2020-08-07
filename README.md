@@ -16,7 +16,7 @@ This is Snake game. The Game consists a leaderboard where the other players scor
 
 ## Live Demo
 
-[Live Demo Link](https://rawcdn.githack.com/Tahirbhalli/Video-Game/c5bafb09d799173ec98abdbb6b550cb406cc044e/dist/index.html)
+[Live Demo Link](https://rawcdn.githack.com/Tahirbhalli/Video-Game/a991cdec972e17e766c2145bf60b22e4b1771699/dist/index.html)
 
 ## Presentation
 [Presentation Link](https://www.loom.com/share/b4be3c8e42b44255bfffb1057a65cb00)
